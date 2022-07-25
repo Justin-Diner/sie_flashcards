@@ -1,0 +1,30 @@
+<div class="container">
+	<a *ngIf="isCreateCard" mat-raised-button class="create-flashcard-button" (click)="closeCreateCard()">Create Cards</a>
+	<div *ngIf="isShown" class="entry-card-container">
+		<mat-card class="entry-card">
+			<mat-card-title-group class="add_flashcard_title">
+			  <mat-card-title>Create A Flashcard</mat-card-title>
+			</mat-card-title-group>
+			<div class="question-container" >
+				<form class="new-card-form">
+					<mat-form-field class="question-input" appearance="fill">
+						<textarea matInput name="newQuestion" [(ngModel)]="question" (ngModelChange)="updateQuestion($event.value)" type="input" placeholder="Add Question"></textarea>
+					</mat-form-field>
+				
+					<mat-form-field class="answer-input" appearance="fill">
+						<textarea ng-model="newCardAnswer" matInput  placeholder="Add Answer"></textarea>
+					</mat-form-field>
+				</form>
+			</div>
+				<div class="button-container">
+					<a mat-raised-button class="add-button" color="white">Add Card</a>
+					<a mat-raised-button class="close-button" (click)="closeCreateCard()" color="white">Close</a>
+				</div>
+		  </mat-card>
+	</div>
+</div>
+<div>
+	<h1>{{question}}</h1>
+</div>
+
+

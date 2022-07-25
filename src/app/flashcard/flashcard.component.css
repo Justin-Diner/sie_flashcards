@@ -1,0 +1,33 @@
+mat-card {
+	width: 370px;
+    height: 200px;
+    word-wrap: break-word;
+    margin: 10px;
+    background-color: white;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+	box-shadow: 0 2px 0px -1px rgba(0,0,0,1), 
+				0 1px 4px 0 rgba(0,0,0,1), 
+				0 1px 4px 0 rgba(0,0,0,1);
+}
+
+.mat-divider {
+    border-color: red;
+}
+
+mat-card-content {
+	padding-top: 6px;
+	font-size: 16px;
+}
+
+.flashcard_question {
+	color: black;
+}
+
+.flashcard_answer {
+	color: red;
+	font-weight: bold;
+	text-align: center;
+}
+

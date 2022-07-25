@@ -1,0 +1,75 @@
+.container {
+}
+
+.add_flashcard_title {
+	align-items: center;
+	justify-content: center;
+}
+
+.question-input {
+	width: 100%;
+}
+
+.answer-input {
+	width: 100%;
+}
+
+.entry-card {
+    width: 450px;
+    margin: auto;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: whitesmoke;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.521);
+}
+
+
+.question-container {
+	width: 100%;
+}
+
+textarea {
+	width: 100%;
+	background-color: white;
+	border-radius: 5px;
+	height: 100%;
+	border-color: black;
+	border: solid 1px;
+}
+
+::placeholder {
+	color: black !important;
+  }
+
+
+.button-container {
+	margin-top: 10px;
+	display: flex;
+	justify-content: right;
+}
+
+.close-button {
+	margin-left: 6px;
+}
+
+::ng-deep .mat-form-field-wrapper{
+	margin-bottom: -1.75em;
+	background-color: white !important;
+	padding-bottom: 0;
+ }
+
+ ::ng-deep .mat-form-field-underline {
+    display: none;
+}
+
+.create-flashcard-button {
+	display: flex;
+	justify-content: center;
+	width: 200px;
+	border: black;
+	border: solid 1px;
+	color: blue;
+	margin: auto;
+}
+

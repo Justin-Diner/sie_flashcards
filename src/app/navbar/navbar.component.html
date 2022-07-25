@@ -1,0 +1,17 @@
+<mat-toolbar color="primary" class="mat-elevation-z8">
+	<mat-icon class="list_icon"> list_alt</mat-icon>
+    <span>SIE Flashcards</span>
+	
+	<div class="spacer"></div>
+
+	<a mat-button>Home</a>
+	<button mat-button [matMenuTriggerFor]="chapterMenu" class="chapters">Chapters</button>
+	<mat-menu #chapterMenu="matMenu">
+		<button mat-menu-item>Chapter 1</button>
+		<button mat-menu-item>Chapter 2</button>
+		<button mat-menu-item>Chapter 3</button>
+		<button mat-menu-item>Chapter 4</button>
+		<button mat-menu-item>Chapter 5</button>
+	</mat-menu>
+	<a mat-raised-button color="white">Sign Up</a>
+  </mat-toolbar>

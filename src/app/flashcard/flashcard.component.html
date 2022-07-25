@@ -1,0 +1,14 @@
+<div class="flashcard-container">
+	<mat-card (click)="revealAnswer()" class="flashcard">
+		<mat-card-title-group>
+			<mat-card-title>Chapter XX</mat-card-title>
+		</mat-card-title-group>
+		<mat-divider class="material-divider"></mat-divider>
+		<mat-card-content class="flashcard_question">
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio, ab!
+		</mat-card-content>
+		<mat-card-content *ngIf="showAnswer" class="flashcard_answer">
+			ANSWER
+		</mat-card-content>
+  	</mat-card>
+</div>

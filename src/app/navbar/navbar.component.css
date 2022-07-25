@@ -1,0 +1,11 @@
+.spacer {
+	flex: 1 1 auto;
+}
+
+.list_icon {
+	padding-right: 5px;
+}
+
+.chapters {
+	padding-right: 50px;
+}
