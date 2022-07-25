@@ -24,9 +24,12 @@ export class EntryCardComponent implements OnInit {
 	this.isCreateCard = !this.isCreateCard;
   }
 
-  updateQuestion(value:string) {
-	this.question = value;
+  updateQuestion() {
 	console.log(this.question);
+  }
+
+  updateAnswer() {
+	console.log(this.answer);
   }
 }
 
