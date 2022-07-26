@@ -5,10 +5,10 @@
 		</mat-card-title-group>
 		<mat-divider class="material-divider"></mat-divider>
 		<mat-card-content class="flashcard_question">
-			{{question}}
+			{{flashcard.question}}
 		</mat-card-content>
 		<mat-card-content *ngIf="showAnswer" class="flashcard_answer">
-			{{answer}}
+			{{flashcard.answer}}
 		</mat-card-content>
   	</mat-card>
 </div>

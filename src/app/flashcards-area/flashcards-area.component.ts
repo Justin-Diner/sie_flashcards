@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FlashcardComponent } from '../flashcard/flashcard.component';
+import { Flashcard } from '../classes/flashcard';
 
 @Component({
   selector: 'app-flashcards-area',
@@ -8,9 +8,13 @@ import { FlashcardComponent } from '../flashcard/flashcard.component';
 })
 export class FlashcardsAreaComponent implements OnInit {
 
+  flashcards: Flashcard[] = [];
+
   constructor() { }
 
   ngOnInit(): void {
+	this.flashcards.push(new Flashcard('Title 1', 'Answer1'));
+	this.flashcards.push(new Flashcard('Title 2', 'Answer2'));
   }
 
 }

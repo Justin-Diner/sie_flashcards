@@ -1,4 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Flashcard } from '../classes/flashcard';
 
 @Component({
   selector: 'app-flashcard',
@@ -6,8 +7,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
   styleUrls: ['./flashcard.component.css']
 })
 export class FlashcardComponent implements OnInit {
-	@Input() question: string = "";
-	@Input() answer: string = "";
+	@Input() flashcard!: Flashcard;
 	showAnswer: boolean = false;
 
   constructor() {

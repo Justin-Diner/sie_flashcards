@@ -1,4 +1,4 @@
-.flashcards-display {
+.flashcards-container {
 	display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -7,5 +7,4 @@
     margin: auto;
     margin-top: 10px;
     padding: 0 10px;
-	border: solid 1px;
 }
