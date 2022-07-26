@@ -7,7 +7,6 @@ import { FlashcardComponent } from '../flashcard/flashcard.component';
   styleUrls: ['./flashcards-area.component.css']
 })
 export class FlashcardsAreaComponent implements OnInit {
-	flashcards: FlashcardComponent[] = []; 
 
   constructor() { }
 

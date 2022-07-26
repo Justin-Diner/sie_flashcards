@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-flashcard',
@@ -6,13 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flashcard.component.css']
 })
 export class FlashcardComponent implements OnInit {
-	question: string = "";
-	answer: string = "";
+	@Input() question: string = "";
+	@Input() answer: string = "";
 	showAnswer: boolean = false;
 
   constructor() {
-	this.question;
-	this.answer;
    }
 
   ngOnInit(): void {

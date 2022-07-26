@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { FlashcardComponent } from '../flashcard/flashcard.component';
 
 @Component({
   selector: 'app-entry-card',
@@ -11,6 +12,7 @@ export class EntryCardComponent implements OnInit {
 	isCreateCard: boolean = false;
 	question:string = '';
 	answer:string = '';
+	flashcards: FlashcardComponent[] = []; 
 
   constructor() { 
 	this.isShown;
@@ -31,6 +33,9 @@ export class EntryCardComponent implements OnInit {
   updateAnswer() {
 	console.log(this.answer);
   }
+
+  newFlashCard() {
+	}
 }
 
 
