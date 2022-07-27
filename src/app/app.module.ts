@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.compo
 	MatCardModule,
 	MatInputModule,
 	MatDividerModule,
-	FormsModule
+	FormsModule,
+	MatSidenavModule
   ],
   providers: [
   ],

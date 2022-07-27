@@ -1,8 +1,15 @@
 <div class="flashcard-container">
 	<mat-card (click)="revealAnswer()" class="flashcard">
-		<mat-card-title-group>
-			<mat-card-title>Chapter XX</mat-card-title>
+		<mat-card-title-group class="mat-card-title">
+			<mat-card-title class="title">Chapter XX</mat-card-title>
+			<button mat-button class="check">
+				<mat-icon class="icon">check</mat-icon>
+			</button>
+			<button mat-button class="trash">
+				<mat-icon class="icon">delete</mat-icon>
+			</button>
 		</mat-card-title-group>
+		
 		<mat-divider class="material-divider"></mat-divider>
 		<mat-card-content class="flashcard_question">
 			{{flashcard.question}}

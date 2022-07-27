@@ -1,4 +1,3 @@
 <div class="flashcards-container">
-	<app-flashcard [flashcard]="flashcards[0]"></app-flashcard>
-	<app-flashcard [flashcard]="flashcards[1]"></app-flashcard>
+	<app-flashcard *ngFor="let card of flashcards" [flashcard]="card"></app-flashcard>
 </div>
