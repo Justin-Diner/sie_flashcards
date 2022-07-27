@@ -20,5 +20,4 @@ export class FlashcardsAreaComponent implements OnInit {
 		}
 	)
   }
-
 }

@@ -59,6 +59,7 @@ mat-card-content {
 	text-align: left;
 }
 
-
-
+.answer_container {
+	height: 79%;
+}
 

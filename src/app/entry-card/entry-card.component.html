@@ -8,11 +8,11 @@
 			<div class="question-container" >
 				<form class="new-card-form">
 					<mat-form-field class="question-input" appearance="fill">
-						<textarea matInput #newQuestion name="newQuestion" [(ngModel)]="question" (ngModelChange)="updateQuestion()" type="input" placeholder="Add Question"></textarea>
+						<textarea matInput #newQuestion name="newQuestion" [(ngModel)]="question" type="input" placeholder="Add Question"></textarea>
 					</mat-form-field>
 				
 					<mat-form-field class="answer-input" appearance="fill">
-						<textarea matInput #newAnswer name="newAnswer" [(ngModel)]="answer" (ngModelChange)="updateAnswer()" type="input" placeholder="Add Answer"></textarea>
+						<textarea matInput #newAnswer name="newAnswer" [(ngModel)]="answer" type="input" placeholder="Add Answer"></textarea>
 					</mat-form-field>
 				</form>
 			</div>

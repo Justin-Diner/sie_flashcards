@@ -7,7 +7,6 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
   selector: 'app-entry-card',
   templateUrl: './entry-card.component.html',
   styleUrls: ['./entry-card.component.css'],
-//  encapsulation: ViewEncapsulation.None,
 })
 export class EntryCardComponent implements OnInit {
 	isShown: boolean = true;
@@ -29,18 +28,20 @@ export class EntryCardComponent implements OnInit {
 	this.isCreateCard = !this.isCreateCard;
   }
 
-  updateQuestion() {
-	console.log(this.question);
-  }
+// These methods show that the question and answer are being tracked when input. 
+//  updateQuestion() {
+//	console.log(this.question);
+//  }
 
-  updateAnswer() {
-	console.log(this.answer);
-  }
+//  updateAnswer() {
+//	console.log(this.answer);
+//  }
 
   newFlashCard() {
 	this.currentCard = new Flashcard(this.question, this.answer);
 	this.flashcards.push(this.currentCard);
 	this._flashcardsService.getFlashcards(this.flashcards);
+	console.log(this.flashcards);
 	}
 
 

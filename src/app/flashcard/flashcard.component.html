@@ -1,21 +1,23 @@
-<div class="flashcard-container">
-	<mat-card (click)="revealAnswer()" class="flashcard">
+<div class="flashcard-container" *ngIf="displayed">
+	<mat-card  class="flashcard">
 		<mat-card-title-group class="mat-card-title">
 			<mat-card-title class="title">Chapter XX</mat-card-title>
 			<button mat-button class="check">
 				<mat-icon class="icon">check</mat-icon>
 			</button>
 			<button mat-button class="trash">
-				<mat-icon class="icon">delete</mat-icon>
+				<mat-icon class="icon" (click)="removeCard()">delete</mat-icon>
 			</button>
 		</mat-card-title-group>
 		
 		<mat-divider class="material-divider"></mat-divider>
-		<mat-card-content class="flashcard_question">
-			{{flashcard.question}}
-		</mat-card-content>
-		<mat-card-content *ngIf="showAnswer" class="flashcard_answer">
-			{{flashcard.answer}}
-		</mat-card-content>
+		<div class="answer_container" (click)="revealAnswer()">
+			<mat-card-content  class="flashcard_question">
+				{{flashcard.question}}
+			</mat-card-content>
+			<mat-card-content *ngIf="showAnswer" class="flashcard_answer">
+				{{flashcard.answer}}
+			</mat-card-content>
+		</div>
   	</mat-card>
 </div>

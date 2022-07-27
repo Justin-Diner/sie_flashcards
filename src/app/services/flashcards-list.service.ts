@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntryCardComponent } from '../entry-card/entry-card.component';
+import { TitleHeadingComponent } from '../title-heading/title-heading.component';
 import { Flashcard } from '../classes/flashcard';
 import { Subject } from 'rxjs';
 
