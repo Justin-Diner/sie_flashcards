@@ -41,7 +41,6 @@ export class EntryCardComponent implements OnInit {
 	this.currentCard = new Flashcard(this.question, this.answer);
 	this.flashcards.push(this.currentCard);
 	this._flashcardsService.getFlashcards(this.flashcards);
-	console.log(this.flashcards);
 	}
 
 

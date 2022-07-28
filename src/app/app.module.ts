@@ -18,6 +18,7 @@ import { EntryCardComponent } from './entry-card/entry-card.component';
 import { TitleHeadingComponent } from './title-heading/title-heading.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.component';
+import { ResetButtonComponent } from './reset-button/reset-button.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.compo
     TitleHeadingComponent,
     FlashcardComponent,
     FlashcardsAreaComponent,
+    ResetButtonComponent,
   ],
   imports: [
     BrowserModule,

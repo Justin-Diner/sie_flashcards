@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashcardsListService } from '../services/flashcards-list.service';
 import { Flashcard } from '../classes/flashcard';
+import { ResetButtonComponent } from '../reset-button/reset-button.component';
+
 
 @Component({
   selector: 'app-title-heading',
@@ -8,28 +10,9 @@ import { Flashcard } from '../classes/flashcard';
   styleUrls: ['./title-heading.component.css']
 })
 export class TitleHeadingComponent implements OnInit {
-	flashcards: Flashcard[] = []; 
 
-  constructor(private _flashcardsService: FlashcardsListService) { }
+  constructor() { }
 
   ngOnInit(): void {
-	this._flashcardsService.currentFlashCardsList$.subscribe(
-		flashcardsList => {
-			this.flashcards = flashcardsList;
-		}
-	)
   }
-
-  restoreFlashcards() {
-	for (let flashcard of this.flashcards) {
-		flashcard.displayed = true
-	}
-	this._flashcardsService.getFlashcards(this.flashcards);
-	this._flashcardsService.currentFlashCardsList$.subscribe(
-		flashcardsList => {
-			this.flashcards = flashcardsList;
-		}
-	)
-	console.log(this.flashcards);
-	}
 }
