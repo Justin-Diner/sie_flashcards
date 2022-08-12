@@ -5,7 +5,7 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
 @Component({
   selector: 'app-flashcards-area',
   templateUrl: './flashcards-area.component.html',
-  styleUrls: ['./flashcards-area.component.css']
+  styleUrls: ['./flashcards-area.component.css'],
 })
 export class FlashcardsAreaComponent implements OnInit {
 
@@ -19,5 +19,10 @@ export class FlashcardsAreaComponent implements OnInit {
 			this.flashcards = flashcardsList;
 		}
 	)
+  }
+
+  changeDisplay(i: number) {
+	this.flashcards[i].displayed = false;
+	console.log(this.flashcards);
   }
 }

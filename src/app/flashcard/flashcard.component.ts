@@ -1,7 +1,5 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
-import { FlashcardsAreaComponent } from '../flashcards-area/flashcards-area.component';
-import { FlashcardsListService } from '../services/flashcards-list.service';
 
 @Component({
   selector: 'app-flashcard',
@@ -13,6 +11,7 @@ export class FlashcardComponent implements OnInit {
 	@Input() flashcard!: Flashcard;
 	showAnswer: boolean = false;
 	displayed: boolean = true;
+	@Output() dontDisplay = new EventEmitter();
 
   constructor() {
    }
@@ -24,7 +23,8 @@ export class FlashcardComponent implements OnInit {
 	this.showAnswer = !this.showAnswer;
   }
 
-  removeCard() {
-	this.displayed = false;
+  hideCard() {
+	this.displayed = !this.displayed;
+	this.dontDisplay.emit();
   }
 }

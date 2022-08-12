@@ -19,6 +19,7 @@ import { TitleHeadingComponent } from './title-heading/title-heading.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.component';
 import { ResetButtonComponent } from './reset-button/reset-button.component';
+import { FlashcardsListService } from './services/flashcards-list.service';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ResetButtonComponent } from './reset-button/reset-button.component';
 	MatSidenavModule
   ],
   providers: [
+	FlashcardsListService
   ],
   bootstrap: [AppComponent]
 })
