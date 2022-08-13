@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
-import { FlashcardComponent } from '../flashcard/flashcard.component';
 import { FlashcardsListService } from '../services/flashcards-list.service';
 
 @Component({

@@ -15,14 +15,16 @@ export class FlashcardsAreaComponent implements OnInit {
 
   ngOnInit(): void {
 	this._flashcardsService.currentFlashCardsList$.subscribe(
-		flashcardsList => {
+		(flashcardsList) => {
 			this.flashcards = flashcardsList;
+			console.log(this.flashcards);
 		}
 	)
   }
 
   changeDisplay(i: number) {
-	this.flashcards[i].displayed = false;
-	console.log(this.flashcards);
+	this.flashcards[i].displayed = !this.flashcards[i].displayed;
+	this.flashcards.splice(i, 0)
+	this._flashcardsService.getFlashcards(this.flashcards);
   }
 }
