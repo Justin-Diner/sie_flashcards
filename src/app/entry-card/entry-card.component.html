@@ -5,17 +5,21 @@
 			<mat-card-title-group class="add_flashcard_title">
 			  <mat-card-title>Create A Flashcard</mat-card-title>
 			</mat-card-title-group>
-			<div class="question-container" >
+			<div class="question-container" font-size="24px">
 				<form class="new-card-form">
+					<h3 class="entry_titles">Question:</h3>
 					<mat-form-field class="question-input" appearance="fill">
 						<textarea matInput #newQuestion name="newQuestion" [(ngModel)]="question" type="input" placeholder="Add Question"></textarea>
 					</mat-form-field>
-				
+					<h3 class="entry_titles">Answer:</h3>
 					<mat-form-field class="answer-input" appearance="fill">
 						<textarea matInput #newAnswer name="newAnswer" [(ngModel)]="answer" type="input" placeholder="Add Answer"></textarea>
 					</mat-form-field>
 				</form>
 			</div>
+				<div class="chapter-drop-down">
+					
+				</div> 
 				<div class="button-container">
 					<a mat-raised-button class="add-button" (click)="newFlashCard()" color="white">Add Card</a>
 					<a mat-raised-button class="close-button" (click)="closeCreateCard()" color="white">Close</a>

@@ -54,13 +54,22 @@ textarea {
 }
 
 ::ng-deep .mat-form-field-wrapper{
-	margin-bottom: -1.75em;
 	background-color: white !important;
 	padding-bottom: 0;
  }
 
  ::ng-deep .mat-form-field-underline {
     display: none;
+}
+
+::ng-deep .mat-form-field-infix {
+	display: none;
+	padding: 0 !important;
+}
+
+::ng-deep .mat-form-field-flex {
+	display: none;
+	padding: 0 !important;
 }
 
 .create-flashcard-button {
@@ -71,5 +80,12 @@ textarea {
 	border: solid 1px;
 	color: blue;
 	margin: auto;
+}
+
+.entry_titles {
+	font-weight: bold;
+	padding: 0px;
+	margin-bottom: -4px;
+	margin-left: 0px;
 }
 

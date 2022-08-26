@@ -10,7 +10,7 @@ import { Flashcard } from '../classes/flashcard';
 export class FlashcardComponent implements OnInit {
 	@Input() flashcard!: Flashcard;
 	showAnswer: boolean = false;
-	displayed: boolean = false;
+	displayed: boolean = true;
 	@Output() dontDisplay = new EventEmitter();
 
   constructor() {

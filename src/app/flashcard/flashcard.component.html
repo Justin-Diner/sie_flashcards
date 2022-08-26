@@ -2,11 +2,11 @@
 	<mat-card  class="flashcard">
 		<mat-card-title-group class="mat-card-title">
 			<mat-card-title class="title">Chapter XX</mat-card-title>
-			<button mat-button class="check">
-				<mat-icon class="icon">check</mat-icon>
+			<button mat-button class="check" (click)="hideCard()">
+				<mat-icon class="icon" >check</mat-icon>
 			</button>
 			<button mat-button class="trash">
-				<mat-icon class="icon" (click)="hideCard()">delete</mat-icon>
+				<mat-icon class="icon">delete</mat-icon>
 			</button>
 		</mat-card-title-group>
 		
