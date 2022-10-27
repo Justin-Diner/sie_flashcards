@@ -4,7 +4,7 @@
 	
 	<div class="spacer"></div>
 
-	<a mat-button>Home</a>
+	<a mat-button (click)="reload()">Home</a>
 	<button mat-button [matMenuTriggerFor]="chapterMenu" class="chapters">Chapters</button>
 	<mat-menu #chapterMenu="matMenu">
 		<button mat-menu-item>Chapter 1</button>

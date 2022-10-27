@@ -11,7 +11,9 @@ export class FlashcardComponent implements OnInit {
 	@Input() flashcard!: Flashcard;
 	showAnswer: boolean = false;
 	displayed: boolean = true;
+	delete: boolean = false;
 	@Output() dontDisplay = new EventEmitter();
+	@Output() deleteCard = new EventEmitter();
 
   constructor() {
    }
@@ -24,7 +26,10 @@ export class FlashcardComponent implements OnInit {
   }
 
   hideCard() {
-	this.displayed = !this.displayed;
 	this.dontDisplay.emit();
+  }
+
+  removeCard() {
+	this.deleteCard.emit();
   }
 }

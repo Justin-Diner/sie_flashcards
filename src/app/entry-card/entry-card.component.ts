@@ -9,7 +9,7 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
 })
 export class EntryCardComponent implements OnInit {
 	isShown: boolean = true;
-	isCreateCard: boolean = false;
+	isCreateCardButton: boolean = false;
 	question:string = '';
 	answer:string = '';
 	flashcards: Flashcard[] = []; 
@@ -24,7 +24,7 @@ export class EntryCardComponent implements OnInit {
 
   closeCreateCard() {
 	this.isShown = !this.isShown;
-	this.isCreateCard = !this.isCreateCard;
+	this.isCreateCardButton = !this.isCreateCardButton;
   }
 
 // These methods show that the question and answer are being tracked when input. 

@@ -20,6 +20,7 @@ import { FlashcardComponent } from './flashcard/flashcard.component';
 import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.component';
 import { ResetButtonComponent } from './reset-button/reset-button.component';
 import { FlashcardsListService } from './services/flashcards-list.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FlashcardsListService } from './services/flashcards-list.service';
 	MatInputModule,
 	MatDividerModule,
 	FormsModule,
-	MatSidenavModule
+	MatSidenavModule,
+	HttpClientModule,
   ],
   providers: [
 	FlashcardsListService
