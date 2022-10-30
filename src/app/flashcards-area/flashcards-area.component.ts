@@ -12,13 +12,13 @@ import { FullFlashcardsListService } from '../services/full-flashcards-list.serv
 export class FlashcardsAreaComponent implements OnInit {
 
   flashcards: Flashcard[] = [];
-  fullFlashcards?: any;
+  fullFlashcards: Flashcard[] = [];
 
   constructor(private _flashcardsService: FlashcardsListService, private fullFlashCardsListService: FullFlashcardsListService) { }
 
   ngOnInit(): void {
-	//this._flashcardsService.currentFlashCardsList$.subscribe(
-	//	(flashcardsList) => {
+	//this.fullFlashCardsListService.currentFlashCardsList$.subscribe(
+	//	(flashcardsList: any) => {
 	//		this.flashcards = flashcardsList;
 	//		console.log(this.flashcards);
 	//	}
@@ -34,17 +34,16 @@ export class FlashcardsAreaComponent implements OnInit {
 					item.question,
 					item.answer,
 					item.id,
-					item.chapter,
+					item.chapter
 				);
 			})
 		)
 	}
 
-
-  changeDisplay(i: number) {
-	this.flashcards[i].displayed = !this.flashcards[i].displayed;
-	this.flashcards.splice(i, 0)
-	this.retrieveFlashcards();
+  deleteConfirmation(i: number) {
+	if (confirm("Are you sure you want to delete this card? It will be PERMANENTLY deleted. The Green Button will note that the card is learned.")) {
+		this.deleteClickedCard(i);
+	}
   }
 
   deleteClickedCard(i: number) {
@@ -56,9 +55,9 @@ export class FlashcardsAreaComponent implements OnInit {
 	this.retrieveFlashcards();
   }
 
-  deleteConfirmation(i: number) {
-	if (confirm("Are you sure you want to delete this card? It will be PERMANENTLY deleted. The Green Button will note that the card is learned.")) {
-		this.deleteClickedCard(i);
+	changeDisplay(i: number) {
+	this.flashcards[i].displayed = !this.flashcards[i].displayed;
+	this.flashcards.splice(i, 0)
+	this.retrieveFlashcards();
 	}
-  }
 }

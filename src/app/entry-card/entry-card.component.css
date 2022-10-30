@@ -1,6 +1,3 @@
-.container {
-}
-
 .add_flashcard_title {
 	align-items: center;
 	justify-content: center;
@@ -87,5 +84,9 @@ textarea {
 	padding: 0px;
 	margin-bottom: -4px;
 	margin-left: 0px;
+}
+
+.chapter_entry {
+	width: 5em;
 }
 

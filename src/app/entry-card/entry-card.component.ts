@@ -1,6 +1,8 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
 import { FlashcardsListService } from '../services/flashcards-list.service';
+import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
+import { FlashcardsAreaComponent } from '../flashcards-area/flashcards-area.component';
 
 @Component({
   selector: 'app-entry-card',
@@ -8,14 +10,14 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
   styleUrls: ['./entry-card.component.css'],
 })
 export class EntryCardComponent implements OnInit {
-	isShown: boolean = true;
 	isCreateCardButton: boolean = false;
+	isShown: boolean = true;
 	question:string = '';
 	answer:string = '';
-	flashcards: Flashcard[] = []; 
-	currentCard?: Flashcard;
+	chapter?:number; 
+	@Output() newFlashcard?: Flashcard;
 
-  constructor(private _flashcardsService: FlashcardsListService) { 
+  constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService) { 
 	this.isShown;
   }
 
@@ -28,20 +30,25 @@ export class EntryCardComponent implements OnInit {
   }
 
 // These methods show that the question and answer are being tracked when input. 
-//  updateQuestion() {
-//	console.log(this.question);
-//  }
+  updateQuestion(val: string) {
+	console.log(this.question);
+  }
 
-//  updateAnswer() {
-//	console.log(this.answer);
-//  }
+  updateAnswer() {
+	console.log(this.answer);
+  }
+
+  updateChapter() {
+	console.log(this.chapter);
+  }
 
   newFlashCard() {
-	this.currentCard = new Flashcard(this.question, this.answer);
-	this.flashcards.push(this.currentCard);
-	this._flashcardsService.getFlashcards(this.flashcards);
+	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, this.chapter);
+	this.fullFlashcardsListService.addFlashcard(flashcardToAdd)
+		.subscribe(data => {
+			console.log(data);
+		})
 	}
-
 
 }
 

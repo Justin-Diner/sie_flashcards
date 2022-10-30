@@ -6,7 +6,9 @@
 			  <mat-card-title>Create A Flashcard</mat-card-title>
 			</mat-card-title-group>
 			<div class="question-container" font-size="24px">
+				<h3 class="entry_titles">Chapter:</h3>
 				<form class="new-card-form">
+					<input class="chapter_entry" name="newChapter" [(ngModel)]="chapter" type="number" min="1" ng-model="myText" name="chapterName" placeholder="N/A"/>
 					<h3 class="entry_titles">Question:</h3>
 					<mat-form-field class="question-input" appearance="fill">
 						<textarea matInput #newQuestion name="newQuestion" [(ngModel)]="question" type="input" placeholder="Add Question"></textarea>

@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Flashcard } from '../classes/flashcard';
 import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 const httpOptions = {
 	headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,7 +14,9 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FullFlashcardsListService {
-  
+
+	private _fullFlashCardsList = new Subject<Flashcard[]>(); 
+	currentFullFlashCardsList$ = this._fullFlashCardsList.asObservable();
 	private baseURL: string = "/api/v1/flashcards";
 
   constructor(private http: HttpClient) { }
@@ -21,6 +24,10 @@ export class FullFlashcardsListService {
   	getAll() {
 		return this.http.get<Flashcard[]>(this.baseURL);
 	} 
+
+	addFlashcard(newFlashCard: Flashcard) {
+		return this.http.post(this.baseURL, newFlashCard);
+	}
 
 	deleteFlashcardById(id: any) {
 		return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text' as 'json' })

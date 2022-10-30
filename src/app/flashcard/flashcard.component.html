@@ -1,7 +1,7 @@
 <div class="flashcard-container" *ngIf="flashcard.displayed">
 	<mat-card  class="flashcard">
 		<mat-card-title-group class="mat-card-title">
-			<mat-card-title class="title">Chapter XX</mat-card-title>
+			<mat-card-title class="title">Chapter {{flashcard.chapter}}</mat-card-title>
 			<button mat-button class="check" (click)="hideCard()">
 				<mat-icon class="icon" >check</mat-icon>
 			</button>
