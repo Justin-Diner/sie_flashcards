@@ -40,11 +40,13 @@ export const addFlashcard = (req: Request, res: Response) => {
 
 export const removeFlashcard = (req: Request, res: Response) => {
 	const id = parseInt(req.params['id']);
+	console.log(id);
 
 	pool.query(getFlashcardById, [id], (error, results) => {
 		const noStudentFound = results.rows;
 		if (noStudentFound.length < 1) {
 			res.send("Flashcard does not exist in database.");
+			console.log("Flashcard does not exist in database.")
 		} 
 		else {
 			pool.query(deleteFlashcard, [id], (error, results) => {
@@ -52,6 +54,7 @@ export const removeFlashcard = (req: Request, res: Response) => {
 					throw error
 				} else {
 					res.status(200).send("Flashcard removed successfully.");
+					console.log("Flashcard removed successfully.");
 				}
 			})
 		}

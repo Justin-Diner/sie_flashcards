@@ -21,6 +21,7 @@ import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.compo
 import { ResetButtonComponent } from './reset-button/reset-button.component';
 import { FlashcardsListService } from './services/flashcards-list.service';
 import { HttpClientModule } from '@angular/common/http';
+import { TrashButtonComponent } from './trash-button/trash-button.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     FlashcardComponent,
     FlashcardsAreaComponent,
     ResetButtonComponent,
+    TrashButtonComponent,
   ],
   imports: [
     BrowserModule,

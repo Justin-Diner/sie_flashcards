@@ -19,9 +19,12 @@ export class FullFlashcardsListService {
   constructor(private http: HttpClient) { }
 
   	getAll() {
-		console.log("it works!");
 		return this.http.get<Flashcard[]>(this.baseURL);
 	} 
+
+	deleteFlashcardById(id: any) {
+		return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text' as 'json' })
+	};
 
 	private handleError(error: HttpErrorResponse): any {
 		if (error.error instanceof ErrorEvent) {
@@ -30,7 +33,7 @@ export class FullFlashcardsListService {
 			console.error(
 				`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
 			}
-		return throwError(`Something bad happened; pelase try again later.`);
+		return throwError(`Something bad happened; please try again later.`);
 	}
 };
 

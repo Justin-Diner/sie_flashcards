@@ -44,12 +44,16 @@ export class FlashcardsAreaComponent implements OnInit {
   changeDisplay(i: number) {
 	this.flashcards[i].displayed = !this.flashcards[i].displayed;
 	this.flashcards.splice(i, 0)
-	this._flashcardsService.getFlashcards(this.flashcards);
+	this.retrieveFlashcards();
   }
 
   deleteClickedCard(i: number) {
-	this.flashcards.splice(i, 1)
-	this._flashcardsService.getFlashcards(this.flashcards);
+	let clickedFlashcardId = this.fullFlashcards[i].id;
+	this.fullFlashCardsListService.deleteFlashcardById(clickedFlashcardId)
+		.subscribe(data => {
+			console.log(data);
+		})
+	this.retrieveFlashcards();
   }
 
   deleteConfirmation(i: number) {
