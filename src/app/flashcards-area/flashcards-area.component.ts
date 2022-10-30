@@ -12,7 +12,7 @@ import { FullFlashcardsListService } from '../services/full-flashcards-list.serv
 export class FlashcardsAreaComponent implements OnInit {
 
   flashcards: Flashcard[] = [];
-  fullFlashcards: Flashcard[] = [];
+  fullFlashcards?: Flashcard[];
 
   constructor(private _flashcardsService: FlashcardsListService, private fullFlashCardsListService: FullFlashcardsListService) { }
 
@@ -26,18 +26,22 @@ export class FlashcardsAreaComponent implements OnInit {
 	this.retrieveFlashcards();
   }
 
-  retrieveFlashcards(): void {
+  retrieveFlashcards(): any {
 	this.fullFlashCardsListService.getAll()
-		.subscribe(response => 
+		.subscribe(response => {
+			this.fullFlashcards = response;
+			console.log(this.fullFlashcards);
 			this.fullFlashcards = response.map(item => {
-				return item = new Flashcard (
+				 item = new Flashcard (
 					item.question,
 					item.answer,
 					item.id,
 					item.chapter
 				);
+				return item;
+				console.log(this.fullFlashcards);
 			})
-		)
+  		})
 	}
 
   deleteConfirmation(i: number) {
@@ -47,7 +51,7 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   deleteClickedCard(i: number) {
-	let clickedFlashcardId = this.fullFlashcards[i].id;
+	let clickedFlashcardId = this.fullFlashcards![i].id;
 	this.fullFlashCardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
 			console.log(data);

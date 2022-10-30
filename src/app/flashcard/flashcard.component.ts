@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
+import FullFlashcardsListService from '../services/full-flashcards-list.service';
 
 @Component({
   selector: 'app-flashcard',
