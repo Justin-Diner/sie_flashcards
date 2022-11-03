@@ -1,11 +1,15 @@
 export class Flashcard {
+	public id?: any;
+	public question:string; 
+	public answer: string;
 	public learned: boolean = false;
-	public displayed: boolean = true;
+	public chapter?: number;
+	public displayed?: boolean = true;
 
-	constructor(
-		public question:string, 
-		public answer: string,
-		public id?: any,		 
-		public chapter?: number,
-		){}
+	constructor(question: string, answer: string, chapter?: number, id?: any){
+		this.question = question;
+		this.answer = answer;
+		this.chapter = chapter;
+		this.id = id;
+	}
 }

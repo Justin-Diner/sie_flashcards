@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { Flashcard } from '../classes/flashcard';
 import { FlashcardsListService } from '../services/flashcards-list.service';
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
+import { EntryCardComponent } from '../entry-card/entry-card.component';
+import { identifierName } from '@angular/compiler';
 
 @Component({
   selector: 'app-flashcards-area',
@@ -17,31 +19,30 @@ export class FlashcardsAreaComponent implements OnInit {
   constructor(private _flashcardsService: FlashcardsListService, private fullFlashCardsListService: FullFlashcardsListService) { }
 
   ngOnInit(): void {
-	//this.fullFlashCardsListService.currentFlashCardsList$.subscribe(
-	//	(flashcardsList: any) => {
-	//		this.flashcards = flashcardsList;
-	//		console.log(this.flashcards);
-	//	}
-	//)
 	this.retrieveFlashcards();
   }
 
-  retrieveFlashcards(): any {
+  updateFlashcards() {
+	this.fullFlashCardsListService.currentFullFlashCardsList$.subscribe(
+	  (fullFlashCardsList: any) => {
+		return this.fullFlashcards = fullFlashCardsList;
+	})
+  }
+
+  retrieveFlashcards() {
 	this.fullFlashCardsListService.getAll()
 		.subscribe(response => {
-			this.fullFlashcards = response;
-			console.log(this.fullFlashcards);
 			this.fullFlashcards = response.map(item => {
 				 item = new Flashcard (
 					item.question,
 					item.answer,
-					item.id,
-					item.chapter
+					item.chapter,
+					item.id
 				);
 				return item;
-				console.log(this.fullFlashcards);
 			})
   		})
+		this.updateFlashcards();
 	}
 
   deleteConfirmation(i: number) {
@@ -51,17 +52,14 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   deleteClickedCard(i: number) {
-	let clickedFlashcardId = this.fullFlashcards![i].id;
+	console.log(this.fullFlashcards);
+	console.log(i);
+	let clickedFlashcardId = this.fullFlashcards![i]["id"];
 	this.fullFlashCardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
-			console.log(data);
+			let resp = JSON.stringify(data);
+			console.log(resp);
 		})
 	this.retrieveFlashcards();
   }
-
-	changeDisplay(i: number) {
-	this.flashcards[i].displayed = !this.flashcards[i].displayed;
-	this.flashcards.splice(i, 0)
-	this.retrieveFlashcards();
-	}
 }

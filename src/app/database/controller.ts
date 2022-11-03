@@ -19,7 +19,7 @@ export const getFlashcardsById = (req: Request, res: Response) => {
 }
 
 export const addFlashcard = (req: Request, res: Response) => {
-	const {question, answer, learned, chapter} = req.body; 
+	const { question, answer, learned, chapter } = req.body; 
 
 	//check if question exists 
 	pool.query(checkQuestion, [question], (error, results) => {

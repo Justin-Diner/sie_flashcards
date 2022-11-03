@@ -4,6 +4,7 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
 import { FormsModule } from '@angular/forms';
 import { FlashcardsAreaComponent } from '../flashcards-area/flashcards-area.component';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-entry-card',
@@ -17,6 +18,7 @@ export class EntryCardComponent implements OnInit {
 	answer:string = '';
 	chapter?:string = ''; 
 	@Output() newFlashcard?: Flashcard;
+	@Output() refreshFlashcards = new EventEmitter();
 
   constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService) { 
 	this.isShown;
@@ -41,17 +43,16 @@ export class EntryCardComponent implements OnInit {
 
   updateChapter(val?: string) {
 	this.chapter = val;
-	console.log(this.chapter);
   }
 
   newFlashCard() {
-	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, null, Number(this.chapter));
+	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, Number(this.chapter));
 	this.fullFlashcardsListService.addFlashcard(flashcardToAdd)
 		.subscribe(data => {
 			console.log(data);
 		})
+	this.refreshFlashcards.emit();
 	}
-
 }
 
 

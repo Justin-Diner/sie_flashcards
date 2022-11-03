@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Flashcard } from '../classes/flashcard';
 import { map } from 'rxjs/operators';
@@ -14,19 +14,24 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class FullFlashcardsListService {
-
+	
 	private _fullFlashCardsList = new Subject<Flashcard[]>(); 
 	currentFullFlashCardsList$ = this._fullFlashCardsList.asObservable();
+	
 	private baseURL: string = "/api/v1/flashcards";
 
   constructor(private http: HttpClient) { }
 
-  	getAll() {
+	getFlashcardList() {
+		return this.http.get<Flashcard[]>(this.baseURL);
+	}
+
+  	getAll(): Observable<Flashcard[]> {
 		return this.http.get<Flashcard[]>(this.baseURL);
 	} 
 
 	addFlashcard(newFlashCard: Flashcard) {
-		return this.http.post(this.baseURL, newFlashCard);
+		return this.http.post(this.baseURL, newFlashCard, { responseType: 'text' as 'json' });
 	}
 
 	deleteFlashcardById(id: any) {

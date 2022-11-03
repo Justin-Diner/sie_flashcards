@@ -1,3 +1,3 @@
 <div class="flashcards-container">
-	<app-flashcard *ngFor="let card of fullFlashcards; let i = index" [flashcard]="card" (dontDisplay)="changeDisplay(i)" (deleteCard)="deleteConfirmation(i)"></app-flashcard>
+	<app-flashcard *ngFor="let card of fullFlashcards; let i = index" [flashcard]="card" (deleteCard)="deleteConfirmation(i)" (refreshFlashcards)="retrieveFlashcards()"></app-flashcard>
 </div>

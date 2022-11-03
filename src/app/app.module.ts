@@ -22,6 +22,7 @@ import { ResetButtonComponent } from './reset-button/reset-button.component';
 import { FlashcardsListService } from './services/flashcards-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TrashButtonComponent } from './trash-button/trash-button.component';
+import FullFlashcardsListService from './services/full-flashcards-list.service';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { TrashButtonComponent } from './trash-button/trash-button.component';
 	HttpClientModule,
   ],
   providers: [
-	FlashcardsListService
+	FlashcardsListService,
+	FullFlashcardsListService
   ],
   bootstrap: [AppComponent]
 })

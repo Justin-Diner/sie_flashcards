@@ -20,11 +20,11 @@ export class ResetButtonComponent implements OnInit {
 	)
   }
 
-  restoreFlashcards() { 
-	for (let i = 0; i < this.flashcards.length; i++) {
-		this.flashcards[i].displayed = true;
-	}
-	let currentCards = this.flashcards;
-	this._flashcardsService.getFlashcards(currentCards);
-	}
+//  restoreFlashcards() { 
+//	for (let i = 0; i < this.flashcards.length; i++) {
+//		this.flashcards[i].displayed = true;
+//	}
+//	let currentCards = this.flashcards;
+//	this._flashcardsService.getFlashcards(currentCards);
+//	}
 }
