@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
 import { Subject } from 'rxjs';
 
-@Injectable(
+@Injectable({
+	providedIn: 'root'
+}
 )
 export class FlashcardsListService {
 

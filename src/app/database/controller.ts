@@ -40,7 +40,6 @@ export const addFlashcard = (req: Request, res: Response) => {
 
 export const removeFlashcard = (req: Request, res: Response) => {
 	const id = parseInt(req.params['id']);
-	console.log(id);
 
 	pool.query(getFlashcardById, [id], (error, results) => {
 		const noStudentFound = results.rows;

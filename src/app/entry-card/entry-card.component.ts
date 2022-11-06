@@ -51,7 +51,7 @@ export class EntryCardComponent implements OnInit {
 		.subscribe(data => {
 			console.log(data);
 		})
-	this.refreshFlashcards.emit();
+	this.refreshFlashcards.emit(flashcardToAdd);
 	}
 }
 

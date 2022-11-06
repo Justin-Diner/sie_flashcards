@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Flashcard } from '../classes/flashcard';
-import FullFlashcardsListService from '../services/full-flashcards-list.service';
 
 @Component({
   selector: 'app-flashcard',
@@ -11,7 +10,6 @@ import FullFlashcardsListService from '../services/full-flashcards-list.service'
 export class FlashcardComponent implements OnInit {
 	@Input() flashcard!: Flashcard;
 	showAnswer: boolean = false;
-	displayed: boolean = true;
 	delete: boolean = false;
 	@Output() dontDisplay = new EventEmitter();
 	@Output() deleteCard = new EventEmitter();
@@ -20,6 +18,7 @@ export class FlashcardComponent implements OnInit {
    }
 
   ngOnInit(): void {
+	console.log('Made it', this.flashcard);
   }
 
   revealAnswer() {
@@ -34,3 +33,5 @@ export class FlashcardComponent implements OnInit {
 	this.deleteCard.emit();
   }
 }
+
+export default FlashcardComponent;

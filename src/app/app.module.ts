@@ -9,7 +9,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
 import {MatSidenavModule} from '@angular/material/sidenav';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +21,8 @@ import { ResetButtonComponent } from './reset-button/reset-button.component';
 import { FlashcardsListService } from './services/flashcards-list.service';
 import { HttpClientModule } from '@angular/common/http';
 import { TrashButtonComponent } from './trash-button/trash-button.component';
-import FullFlashcardsListService from './services/full-flashcards-list.service';
+import { FullFlashcardsListService } from './services/full-flashcards-list.service';
+import { CurrentDisplayedFlashcardsService } from './services/current-displayed-flashcards.service';
 
 @NgModule({
   declarations: [
@@ -51,8 +51,6 @@ import FullFlashcardsListService from './services/full-flashcards-list.service';
 	HttpClientModule,
   ],
   providers: [
-	FlashcardsListService,
-	FullFlashcardsListService
   ],
   bootstrap: [AppComponent]
 })

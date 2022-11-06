@@ -4,7 +4,9 @@ import { Observable, of, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Flashcard } from '../classes/flashcard';
 import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ObserversModule } from '@angular/cdk/observers';
 
 const httpOptions = {
 	headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -15,9 +17,6 @@ const httpOptions = {
 })
 export class FullFlashcardsListService {
 	
-	private _fullFlashCardsList = new Subject<Flashcard[]>(); 
-	currentFullFlashCardsList$ = this._fullFlashCardsList.asObservable();
-	
 	private baseURL: string = "/api/v1/flashcards";
 
   constructor(private http: HttpClient) { }
@@ -26,8 +25,13 @@ export class FullFlashcardsListService {
 		return this.http.get<Flashcard[]>(this.baseURL);
 	}
 
-  	getAll(): Observable<Flashcard[]> {
-		return this.http.get<Flashcard[]>(this.baseURL);
+  	getAll(): Observable<Flashcard[]>{
+		return this.http.get<Flashcard[]>(this.baseURL).pipe(map(flashcards => flashcards.map(flashcard =>  {
+			if (flashcard.displayed === undefined) {
+				flashcard.displayed = true;
+			}
+			return flashcard;
+		})));
 	} 
 
 	addFlashcard(newFlashCard: Flashcard) {
