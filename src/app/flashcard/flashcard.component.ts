@@ -18,7 +18,6 @@ export class FlashcardComponent implements OnInit {
    }
 
   ngOnInit(): void {
-	console.log('Made it', this.flashcard);
   }
 
   revealAnswer() {
