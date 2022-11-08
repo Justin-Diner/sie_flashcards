@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
 import { of } from 'rxjs';
-import {map} from 'rxjs';
-import { FlashcardsListService } from '../services/flashcards-list.service';
+import { switchMap } from 'rxjs';
+import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service';
 
 @Component({
   selector: 'app-flashcards-area',
@@ -14,29 +14,29 @@ import { FlashcardsListService } from '../services/flashcards-list.service';
 export class FlashcardsAreaComponent implements OnInit {
 	
   fullFlashcards: Flashcard[] = [];
-  retrieveFlashcardsResponse: Observable<Flashcard[]> = of([]);
+  retrieveFlashcardsResponse$: Observable<Flashcard[]> = of([]);
 
   constructor(
 	private fullFlashcardsListService: FullFlashcardsListService,
-	private flashcardsList: FlashcardsListService
+	private currentDisplayedFlashcards: CurrentDisplayedFlashcardsService
 	 ) {}
 
 
   ngOnInit(): void {
-	this.retrieveFlashcardsResponse = this.retrieveFlashcards();
+	this.retrieveFlashcardsResponse$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
 	this.setfullFlashcards();
   }
 
   setfullFlashcards() {
 	this.fullFlashcardsListService.getFlashcardList().subscribe(response => {
 		this.fullFlashcards = response;
-		this.flashcardsList.setFlashcards(this.fullFlashcards);
 	})
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
    return this.fullFlashcardsListService.getAll();
 	}
+
 
   deleteConfirmation(i: number) {
 	if (confirm("Are you sure you want to delete this card? It will be PERMANENTLY deleted. The Green Button will note that the card is learned.")) {
@@ -45,13 +45,11 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   deleteClickedCard(i: number) {
-	console.log(i);
 	let clickedFlashcardId = this.fullFlashcards![i]["id"];
 	this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
-			let resp = JSON.stringify(data);
-			console.log(resp);
-			this.retrieveFlashcardsResponse = this.retrieveFlashcards();
+			console.log(data);
+			this.retrieveFlashcardsResponse$ = this.retrieveFlashcards();
 		})
   }
 }

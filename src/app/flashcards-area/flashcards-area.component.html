@@ -1,5 +1,5 @@
 <div class="flashcards-container">
 
 
-	<app-flashcard *ngFor="let card of retrieveFlashcardsResponse | async; let i = index" [flashcard]="card" (deleteCard)="deleteConfirmation(i)" (refreshFlashcards)="retrieveFlashcards()"></app-flashcard>
+	<app-flashcard *ngFor="let card of retrieveFlashcardsResponse$ | async; let i = index" [flashcard]="card" (deleteCard)="deleteConfirmation(i)" (refreshFlashcards)="retrieveFlashcards()"></app-flashcard>
 </div>
