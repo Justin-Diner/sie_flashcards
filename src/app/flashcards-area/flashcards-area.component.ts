@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
-import { of } from 'rxjs';
+import { of, map } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service';
 
@@ -13,7 +13,7 @@ import { CurrentDisplayedFlashcardsService } from '../services/current-displayed
 })
 export class FlashcardsAreaComponent implements OnInit {
 	
-  fullFlashcards: Flashcard[] = [];
+  displayedFlashcards: Flashcard[] = [];
   retrieveFlashcardsResponse$: Observable<Flashcard[]> = of([]);
 
   constructor(
@@ -23,19 +23,32 @@ export class FlashcardsAreaComponent implements OnInit {
 
 
   ngOnInit(): void {
-	this.retrieveFlashcardsResponse$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
 	this.setfullFlashcards();
+	this.retrieveFlashcardsResponse$ = this.retrieveFlashcards();
+  }
+
+  updatingFlashcards() {
+	this.setfullFlashcards();
+	return this.retrieveFlashcardsResponse$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
   }
 
   setfullFlashcards() {
-	this.fullFlashcardsListService.getFlashcardList().subscribe(response => {
-		this.fullFlashcards = response;
+	this.fullFlashcardsListService.getAll().subscribe(response => {
+		this.displayedFlashcards = response;
 	})
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
-   return this.fullFlashcardsListService.getAll();
-	}
+	return this.fullFlashcardsListService.getAll().pipe(
+			map(flashcards => flashcards
+				.map(flashcard =>  {
+					if (flashcard.displayed === undefined) {
+						flashcard.displayed = true;
+					}
+				return flashcard;
+			}))
+	);
+  }
 
 
   deleteConfirmation(i: number) {
@@ -45,11 +58,11 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   deleteClickedCard(i: number) {
-	let clickedFlashcardId = this.fullFlashcards![i]["id"];
+	let clickedFlashcardId = this.displayedFlashcards![i]["id"];
 	this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
 			console.log(data);
-			this.retrieveFlashcardsResponse$ = this.retrieveFlashcards();
+			this.updatingFlashcards();
 		})
   }
 }

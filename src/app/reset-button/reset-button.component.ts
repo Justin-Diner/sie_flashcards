@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FlashcardsListService } from '../services/flashcards-list.service';
-import { Flashcard } from '../classes/flashcard';
+import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service'; 
 
 @Component({
   selector: 'app-reset-button',
@@ -8,23 +8,14 @@ import { Flashcard } from '../classes/flashcard';
   styleUrls: ['./reset-button.component.css']
 })
 export class ResetButtonComponent implements OnInit {
-	flashcards: Flashcard[] = []; 
 
-  constructor(private _flashcardsService: FlashcardsListService) { }
+  constructor(private _flashcardsService: FlashcardsListService, private currentDisplayedFlashcardsService: CurrentDisplayedFlashcardsService) { }
 
   ngOnInit(): void {
-	this._flashcardsService.currentFlashCardsList$.subscribe(
-		flashcardsList => {
-			this.flashcards = flashcardsList;
-		}
-	)
+
   }
 
-//  restoreFlashcards() { 
-//	for (let i = 0; i < this.flashcards.length; i++) {
-//		this.flashcards[i].displayed = true;
-//	}
-//	let currentCards = this.flashcards;
-//	this._flashcardsService.getFlashcards(currentCards);
-//	}
+  restoreFlashcards() { 
+	this.currentDisplayedFlashcardsService.updateFlashcards(2);
+  }
 }

@@ -27,14 +27,14 @@ export class FullFlashcardsListService {
 
   	getAll(): Observable<Flashcard[]>{
 		return this.http.get<Flashcard[]>(this.baseURL)
-		.pipe(
-			map(flashcards => flashcards.map(flashcard =>  {
-					if (flashcard.displayed === undefined) {
-						flashcard.displayed = true;
-					}
-		return flashcard;
-			}
-		)));
+		//.pipe(
+		//	map(flashcards => flashcards.map(flashcard =>  {
+		//			if (flashcard.displayed === undefined) {
+		//				flashcard.displayed = true;
+		//			}
+		//return flashcard;
+		//	}
+		//)));
 	} 
 
 	addFlashcard(newFlashCard: Flashcard) {
