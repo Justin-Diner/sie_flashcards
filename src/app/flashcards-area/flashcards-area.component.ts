@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
-import { of, map } from 'rxjs';
+import { of, map, tap } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service';
 
@@ -14,7 +14,7 @@ import { CurrentDisplayedFlashcardsService } from '../services/current-displayed
 export class FlashcardsAreaComponent implements OnInit {
 	
   displayedFlashcards: Flashcard[] = [];
-  retrieveFlashcardsResponse$: Observable<Flashcard[]> = of([]);
+  displayedFlashcards$: Observable<Flashcard[]> = of([]);
 
   constructor(
 	private fullFlashcardsListService: FullFlashcardsListService,
@@ -23,19 +23,12 @@ export class FlashcardsAreaComponent implements OnInit {
 
 
   ngOnInit(): void {
+	this.displayedFlashcards$ = this.retrieveFlashcards();
 	this.setfullFlashcards();
-	this.retrieveFlashcardsResponse$ = this.retrieveFlashcards();
-  }
-
-  updatingFlashcards() {
-	this.setfullFlashcards();
-	return this.retrieveFlashcardsResponse$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
-  }
-
-  setfullFlashcards() {
-	this.fullFlashcardsListService.getAll().subscribe(response => {
-		this.displayedFlashcards = response;
-	})
+	this.displayedFlashcards$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(
+		switchMap(update => this.retrieveFlashcards()),
+		tap(update => this.setfullFlashcards())
+		);
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
@@ -46,10 +39,20 @@ export class FlashcardsAreaComponent implements OnInit {
 						flashcard.displayed = true;
 					}
 				return flashcard;
-			}))
+				}))
 	);
   }
 
+  setfullFlashcards() {
+	this.displayedFlashcards$.subscribe(flashcards => {
+		this.displayedFlashcards = flashcards;
+	})
+  }
+
+  updateFlashcards() {
+	 this.displayedFlashcards$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
+	 this.setfullFlashcards();
+  }
 
   deleteConfirmation(i: number) {
 	if (confirm("Are you sure you want to delete this card? It will be PERMANENTLY deleted. The Green Button will note that the card is learned.")) {
@@ -62,7 +65,7 @@ export class FlashcardsAreaComponent implements OnInit {
 	this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
 			console.log(data);
-			this.updatingFlashcards();
+			this.updateFlashcards();
 		})
   }
 }

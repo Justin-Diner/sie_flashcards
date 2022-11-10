@@ -12,11 +12,11 @@ import { FullFlashcardsListService } from '../services/full-flashcards-list.serv
 
 export class CurrentDisplayedFlashcardsService {
 
-	public refreshFlashCardsList$ = new BehaviorSubject<Number>(0); 
+	public refreshFlashCardsList$ = new BehaviorSubject<boolean>(true); 
 
 	constructor(private http: HttpClient, private fullFlashcardsListService: FullFlashcardsListService) { }
 
 	updateFlashcards(refreshItem: any) {
-		this.refreshFlashCardsList$.next(refreshItem++);
+		this.refreshFlashCardsList$.next(!this.refreshFlashCardsList$);
 	}
 }

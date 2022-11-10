@@ -46,15 +46,10 @@ export class EntryCardComponent implements OnInit {
   }
 
   newFlashCard() {
-	let counter = 1;
 	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, Number(this.chapter));
-	this.fullFlashcardsListService.addFlashcard(flashcardToAdd)
-		.subscribe(data => {
-			console.log(data);
-		
-		})
-		counter++;
-		this.currentDisplayedFlashcardsService.updateFlashcards(counter++);
+	this.fullFlashcardsListService.addFlashcard(flashcardToAdd).subscribe(data => {
+		this.currentDisplayedFlashcardsService.updateFlashcards(true);
+		});
 	}
 }
 
