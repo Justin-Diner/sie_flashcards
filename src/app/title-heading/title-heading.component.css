@@ -2,15 +2,16 @@
 	display: flex;
 	align-items: center;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: flex-end;
 }
 
 .title {
 	padding-top: 25px;
-	padding-left: 100px;
+	padding-left: 200px;
 	color: black;
 	text-decoration: underline;
 	align-items: center;
+	justify-content: center;
 }
 
 .restore {
@@ -22,4 +23,9 @@
 	margin-right: 10px;
 	margin-bottom: 8px;
 	border: none;
+}
+
+.chapter-drop-down {
+	color: blue;
+	margin-right: 16px;
 }

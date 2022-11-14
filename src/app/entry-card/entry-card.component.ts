@@ -5,7 +5,7 @@ import { FullFlashcardsListService } from '../services/full-flashcards-list.serv
 import { FormsModule } from '@angular/forms';
 import { FlashcardsAreaComponent } from '../flashcards-area/flashcards-area.component';
 import { EventEmitter } from '@angular/core';
-import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service';
+import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
 
 @Component({
   selector: 'app-entry-card',
@@ -20,7 +20,7 @@ export class EntryCardComponent implements OnInit {
 	chapter?:string = ''; 
 	@Output() newFlashcard?: Flashcard;
 
-  constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService, private currentDisplayedFlashcardsService: CurrentDisplayedFlashcardsService) { 
+  constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService, private refreshFullFlashcardsService: RefreshFullFlashcardsService) { 
 	this.isShown;
   }
 
@@ -48,7 +48,7 @@ export class EntryCardComponent implements OnInit {
   newFlashCard() {
 	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, Number(this.chapter));
 	this.fullFlashcardsListService.addFlashcard(flashcardToAdd).subscribe(data => {
-		this.currentDisplayedFlashcardsService.updateFlashcards(true);
+		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		});
 	}
 }

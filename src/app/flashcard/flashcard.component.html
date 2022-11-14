@@ -2,7 +2,7 @@
 	<mat-card  class="flashcard">
 		<mat-card-title-group class="mat-card-title">
 			<mat-card-title class="title">Chapter {{flashcard.chapter}}</mat-card-title>
-			<button mat-button class="check" (click)="hideCard()">
+			<button mat-button class="check" (click)="hideCurrentCard()">
 				<mat-icon class="icon" >check</mat-icon>
 			</button>
 			<button mat-button class="trash" (click)="removeCard()">

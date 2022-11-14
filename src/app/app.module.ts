@@ -17,12 +17,12 @@ import { EntryCardComponent } from './entry-card/entry-card.component';
 import { TitleHeadingComponent } from './title-heading/title-heading.component';
 import { FlashcardComponent } from './flashcard/flashcard.component';
 import { FlashcardsAreaComponent } from './flashcards-area/flashcards-area.component';
-import { ResetButtonComponent } from './reset-button/reset-button.component';
+import { ResetButtonComponent } from './buttons/reset-button/reset-button.component';
 import { FlashcardsListService } from './services/flashcards-list.service';
 import { HttpClientModule } from '@angular/common/http';
-import { TrashButtonComponent } from './trash-button/trash-button.component';
+import { TrashButtonComponent } from './buttons/trash-button/trash-button.component';
 import { FullFlashcardsListService } from './services/full-flashcards-list.service';
-import { CurrentDisplayedFlashcardsService } from './services/current-displayed-flashcards.service';
+import { ChapterDropdownComponent } from './chapter-dropdown/chapter-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +34,7 @@ import { CurrentDisplayedFlashcardsService } from './services/current-displayed-
     FlashcardsAreaComponent,
     ResetButtonComponent,
     TrashButtonComponent,
+    ChapterDropdownComponent,
   ],
   imports: [
     BrowserModule,

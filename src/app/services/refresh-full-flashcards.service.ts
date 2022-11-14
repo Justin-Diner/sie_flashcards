@@ -5,18 +5,17 @@ import { BehaviorSubject } from 'rxjs';
 import { Flashcard } from '../classes/flashcard';
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
-
-export class CurrentDisplayedFlashcardsService {
+export class RefreshFullFlashcardsService {
 
 	public refreshFlashCardsList$ = new BehaviorSubject<boolean>(true); 
 
-	constructor(private http: HttpClient, private fullFlashcardsListService: FullFlashcardsListService) { }
+  constructor(private http: HttpClient, private fullFlashcardsListService: FullFlashcardsListService) { }
 
-	updateFlashcards(refreshItem: any) {
+	triggerUpdateFlashcards(refreshItem: any) {
 		this.refreshFlashCardsList$.next(!this.refreshFlashCardsList$);
 	}
 }
+

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
-import { of, map, tap } from 'rxjs';
+import { of, map, tap, Subject } from 'rxjs';
 import { switchMap } from 'rxjs';
-import { CurrentDisplayedFlashcardsService } from '../services/current-displayed-flashcards.service';
+import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
+import { FlashcardsListService } from '../services/flashcards-list.service'
 
 @Component({
   selector: 'app-flashcards-area',
@@ -18,16 +19,17 @@ export class FlashcardsAreaComponent implements OnInit {
 
   constructor(
 	private fullFlashcardsListService: FullFlashcardsListService,
-	private currentDisplayedFlashcards: CurrentDisplayedFlashcardsService
+	private refreshFullFlashcards: RefreshFullFlashcardsService,
+	private flashcardsListService: FlashcardsListService
 	 ) {}
 
 
   ngOnInit(): void {
 	this.displayedFlashcards$ = this.retrieveFlashcards();
-	this.setfullFlashcards();
-	this.displayedFlashcards$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(
+	this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
 		switchMap(update => this.retrieveFlashcards()),
-		tap(update => this.setfullFlashcards())
+		tap(update => this.setfullFlashcards()),
+		tap(update => this.flashcardsListService.setFlashcards(update))
 		);
   }
 
@@ -50,7 +52,7 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   updateFlashcards() {
-	 this.displayedFlashcards$ = this.currentDisplayedFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
+	 this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
 	 this.setfullFlashcards();
   }
 
@@ -68,4 +70,5 @@ export class FlashcardsAreaComponent implements OnInit {
 			this.updateFlashcards();
 		})
   }
+
 }

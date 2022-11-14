@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlashcardsListService } from '../services/flashcards-list.service';
 import { Flashcard } from '../classes/flashcard';
-import { ResetButtonComponent } from '../reset-button/reset-button.component';
+import { ResetButtonComponent } from '../buttons/reset-button/reset-button.component';
 
 
 @Component({
