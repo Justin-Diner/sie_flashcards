@@ -3,6 +3,8 @@ import { Flashcard } from '../classes/flashcard';
 import { Observable } from 'rxjs';
 import { FlashcardsListService } from '../services/flashcards-list.service';
 import { SubscriptionsContainer } from '../classes/subscriptions-container';
+import { UntypedFormBuilder } from '@angular/forms';
+import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service'
 
 @Component({
   selector: 'app-chapter-dropdown',
@@ -11,11 +13,14 @@ import { SubscriptionsContainer } from '../classes/subscriptions-container';
 })
 export class ChapterDropdownComponent implements OnInit {
 
-	public currentChapterList = [];
+	public currentChapterList: number[] = [];
 	private currentFlashcardList: Flashcard[] = [];
 	private subs = new SubscriptionsContainer();
 
-  constructor(private flashcardsListService: FlashcardsListService) { }
+  constructor(
+	private flashcardsListService: FlashcardsListService, 
+	private refreshFullFlashcardsService: RefreshFullFlashcardsService
+	) { }
 
   ngOnInit(): void {
 	this.identifyChapters();
@@ -24,18 +29,30 @@ export class ChapterDropdownComponent implements OnInit {
   identifyChapters() {
 	this.subs.add = this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {
 		this.currentFlashcardList = flashcardsList;
-		this.fillChapterList();
+		this.currentChapterList = this.fillChapterList();
+		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		this.subs.dispose();
 	})
   }
 
   fillChapterList(): number[] {
-	let chapterListMap = new Map<number, number>()
 	let finalChapterList: number[] = [];
+	let chapterListMap = this.fillChapterListMap(this.currentFlashcardList);
+
+	for (const key of chapterListMap.keys()){
+		finalChapterList.push(key);
+	}
+	
+	finalChapterList.sort((a, b) => a - b);
+	return finalChapterList
+  }
+
+  fillChapterListMap(flashcards: Flashcard[]): Map<number, number> {
+	let chapterListMap = new Map<number, number>()
 
 	for (let i = 0; i < this.currentFlashcardList.length; i++) {
 		
-		let chapterNumber: number | undefined = this.currentFlashcardList[i].chapter;
+		let chapterNumber: number | undefined = flashcards[i].chapter;
 		if (chapterNumber == undefined) {
 			continue
 		} else if (chapterNumber !== undefined && chapterListMap.has(chapterNumber)) {
@@ -44,8 +61,6 @@ export class ChapterDropdownComponent implements OnInit {
 			chapterListMap.set(chapterNumber, 1);
 		}
   	}
-	console.log(chapterListMap);
-	console.log(finalChapterList);
-	return finalChapterList
+	return chapterListMap;
   }
 }

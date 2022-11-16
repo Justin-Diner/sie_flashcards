@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FlashcardsAreaComponent } from '../flashcards-area/flashcards-area.component';
 import { EventEmitter } from '@angular/core';
 import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
+import { SubscriptionsContainer } from '../classes/subscriptions-container';
 
 @Component({
   selector: 'app-entry-card',
@@ -20,6 +21,8 @@ export class EntryCardComponent implements OnInit {
 	chapter?:string = ''; 
 	@Output() newFlashcard?: Flashcard;
 
+	private subs = new SubscriptionsContainer();
+	
   constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService, private refreshFullFlashcardsService: RefreshFullFlashcardsService) { 
 	this.isShown;
   }
@@ -47,8 +50,9 @@ export class EntryCardComponent implements OnInit {
 
   newFlashCard() {
 	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, Number(this.chapter));
-	this.fullFlashcardsListService.addFlashcard(flashcardToAdd).subscribe(data => {
+	this.subs.add = this.fullFlashcardsListService.addFlashcard(flashcardToAdd).subscribe(data => {
 		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
+		this.subs.dispose();
 		});
 	}
 }

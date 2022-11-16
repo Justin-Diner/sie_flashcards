@@ -6,6 +6,7 @@ import { of, map, tap, Subject } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
 import { FlashcardsListService } from '../services/flashcards-list.service'
+import { SubscriptionsContainer } from '../classes/subscriptions-container';
 
 @Component({
   selector: 'app-flashcards-area',
@@ -16,6 +17,7 @@ export class FlashcardsAreaComponent implements OnInit {
 	
   displayedFlashcards: Flashcard[] = [];
   displayedFlashcards$: Observable<Flashcard[]> = of([]);
+  private subs = new SubscriptionsContainer();
 
   constructor(
 	private fullFlashcardsListService: FullFlashcardsListService,
@@ -46,8 +48,9 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   setfullFlashcards() {
-	this.displayedFlashcards$.subscribe(flashcards => {
+	this.subs.add = this.displayedFlashcards$.subscribe(flashcards => {
 		this.displayedFlashcards = flashcards;
+		this.subs.dispose();
 	})
   }
 
@@ -64,10 +67,11 @@ export class FlashcardsAreaComponent implements OnInit {
 
   deleteClickedCard(i: number) {
 	let clickedFlashcardId = this.displayedFlashcards![i]["id"];
-	this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
+	this.subs.add = this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
 		.subscribe(data => {
 			console.log(data);
 			this.updateFlashcards();
+			this.subs.dispose();
 		})
   }
 
