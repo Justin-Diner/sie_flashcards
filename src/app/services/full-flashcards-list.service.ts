@@ -21,7 +21,7 @@ export class FullFlashcardsListService {
 		return this.http.get<Flashcard[]>(this.baseURL);
 	}
 
-  	getAll(): Observable<Flashcard[]>{
+  getAll(): Observable<Flashcard[]>{
 		return this.http.get<Flashcard[]>(this.baseURL)
 	} 
 

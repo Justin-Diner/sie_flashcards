@@ -23,8 +23,11 @@ export class EntryCardComponent implements OnInit {
 
 	private subs = new SubscriptionsContainer();
 	
-  constructor(private _flashcardsService: FlashcardsListService, private fullFlashcardsListService: FullFlashcardsListService, private refreshFullFlashcardsService: RefreshFullFlashcardsService) { 
-	this.isShown;
+  constructor(
+		private _flashcardsService: FlashcardsListService, 
+		private fullFlashcardsListService: FullFlashcardsListService, 
+		private refreshFullFlashcardsService: RefreshFullFlashcardsService) { 
+			this.isShown;
   }
 
   ngOnInit(): void {
@@ -54,6 +57,7 @@ export class EntryCardComponent implements OnInit {
 		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		this.subs.dispose();
 		});
+	
 	}
 }
 

@@ -18,19 +18,19 @@ export class ChapterDropdownComponent implements OnInit {
 	private subs = new SubscriptionsContainer();
 
   constructor(
-	private flashcardsListService: FlashcardsListService, 
-	private refreshFullFlashcardsService: RefreshFullFlashcardsService
+		private flashcardsListService: FlashcardsListService, 
+		private refreshFullFlashcardsService: RefreshFullFlashcardsService
 	) { }
 
   ngOnInit(): void {
+	this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 	this.identifyChapters();
   }
 
   identifyChapters() {
-	this.subs.add = this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {
+	this.subs.add = this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {	
 		this.currentFlashcardList = flashcardsList;
 		this.currentChapterList = this.fillChapterList();
-		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		this.subs.dispose();
 	})
   }

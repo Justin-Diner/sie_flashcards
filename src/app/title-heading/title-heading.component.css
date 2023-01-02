@@ -1,15 +1,10 @@
 .header-title {
 	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
 	justify-content: space-between;
-	align-items: center;
-	align-content: stretch;
 }
 
 .align1{
-	background-color: green;
-	width: 189px;
+	align-self: flex-start;
 }
 
 .title {
@@ -17,21 +12,19 @@
 	padding-top: 25px;
 	color: black;
 	text-decoration: underline;
-	align-items: center;
 	justify-content: center;
-	text-align: center;
+	padding-left: 10%;
 	
 }
 
 
 .chapter-drop-down {
-	padding-top: 25px;
 	align-self: flex-end;
+	padding-top: 25px;
 	padding-bottom: 8px;
 	border: 1px solid;
 	width: 89px;
 	height: 40px;
-	margin-left: 25%;
 	margin-right: 10px;
 	margin-bottom: 8px;
 	border: none;

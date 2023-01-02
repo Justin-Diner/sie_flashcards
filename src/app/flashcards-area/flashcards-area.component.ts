@@ -55,8 +55,9 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   updateFlashcards() {
-	 this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(switchMap(update => this.retrieveFlashcards()));
-	 this.setfullFlashcards();
+	 this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(switchMap(update => 
+		this.retrieveFlashcards()));
+	 	this.setfullFlashcards();
   }
 
   deleteConfirmation(i: number) {
