@@ -22,7 +22,7 @@ export const addFlashcard = (req: Request, res: Response) => {
 	const { question, answer, learned, chapter } = req.body; 
 
 	//check if question exists 
-	pool.query(checkQuestion, [question], (error, results) => {
+		pool.query(checkQuestion, [question], (error, results) => {
 		if (results.rows.length >= 1) {
 			res.send("Question already exists.")
 		} else {
@@ -32,6 +32,7 @@ export const addFlashcard = (req: Request, res: Response) => {
 				throw error;
 			} else {
 			res.status(201).send("Flashcard Created Successfully!");
+			console.log("Flashcard Created Successfully!")
 			};
 		})
 	}

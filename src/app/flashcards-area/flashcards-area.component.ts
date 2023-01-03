@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
-import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
-import { of, map, tap, Subject } from 'rxjs';
+import { of, map, tap, share, Subject, shareReplay } from 'rxjs';
 import { switchMap } from 'rxjs';
+import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
 import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
 import { FlashcardsListService } from '../services/flashcards-list.service'
 import { SubscriptionsContainer } from '../classes/subscriptions-container';
@@ -27,11 +27,12 @@ export class FlashcardsAreaComponent implements OnInit {
 
 
   ngOnInit(): void {
-	this.displayedFlashcards$ = this.retrieveFlashcards();
 	this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
 		switchMap(update => this.retrieveFlashcards()),
-		tap(update => this.setfullFlashcards()),
-		tap(update => this.flashcardsListService.setFlashcards(update))
+		//tap(update => this.setfullFlashcards()),
+		tap(update => this.displayedFlashcards = update as Flashcard[]),
+		tap(update => this.flashcardsListService.setFlashcards(this.displayedFlashcards)),
+		tap(update => console.log(this.displayedFlashcards)),
 		);
   }
 
@@ -49,7 +50,7 @@ export class FlashcardsAreaComponent implements OnInit {
 
   setfullFlashcards() {
 	this.subs.add = this.displayedFlashcards$.subscribe(flashcards => {
-		this.displayedFlashcards = flashcards;
+		this.displayedFlashcards = flashcards as Flashcard[];
 		this.subs.dispose();
 	})
   }

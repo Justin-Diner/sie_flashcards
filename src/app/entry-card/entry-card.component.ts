@@ -51,12 +51,13 @@ export class EntryCardComponent implements OnInit {
 	this.chapter = val;
   }
 
-  newFlashCard() {
+  newFlashCard(): void {
 	let flashcardToAdd: Flashcard = new Flashcard(this.question, this.answer, Number(this.chapter));
 	this.subs.add = this.fullFlashcardsListService.addFlashcard(flashcardToAdd).subscribe(data => {
 		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		this.subs.dispose();
 		});
+		
 	
 	}
 }

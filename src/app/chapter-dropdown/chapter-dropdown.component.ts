@@ -23,21 +23,19 @@ export class ChapterDropdownComponent implements OnInit {
 	) { }
 
   ngOnInit(): void {
-	this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 	this.identifyChapters();
   }
 
   identifyChapters() {
-	this.subs.add = this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {	
+		this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {	
 		this.currentFlashcardList = flashcardsList;
-		this.currentChapterList = this.fillChapterList();
-		this.subs.dispose();
-	})
+		this.currentChapterList = this.fillChapterList(flashcardsList);
+		})
   }
 
-  fillChapterList(): number[] {
+  fillChapterList(flashcardList: Flashcard[]): number[] {
 	let finalChapterList: number[] = [];
-	let chapterListMap = this.fillChapterListMap(this.currentFlashcardList);
+	let chapterListMap = this.fillChapterListMap(flashcardList);
 
 	for (const key of chapterListMap.keys()){
 		finalChapterList.push(key);

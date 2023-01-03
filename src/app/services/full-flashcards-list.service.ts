@@ -25,7 +25,7 @@ export class FullFlashcardsListService {
 		return this.http.get<Flashcard[]>(this.baseURL)
 	} 
 
-	addFlashcard(newFlashCard: Flashcard) {
+	addFlashcard(newFlashCard: Flashcard): Observable<Object> {
 		return this.http.post(this.baseURL, newFlashCard, { responseType: 'text' as 'json' });
 	}
 
