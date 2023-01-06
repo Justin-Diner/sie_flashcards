@@ -27,19 +27,18 @@ export class FlashcardsAreaComponent implements OnInit {
 
 
   ngOnInit(): void {
-	this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
-		switchMap(update => this.retrieveFlashcards()),
-		//tap(update => this.setfullFlashcards()),
-		tap(update => this.displayedFlashcards = update as Flashcard[]),
-		tap(update => this.flashcardsListService.setFlashcards(this.displayedFlashcards)),
-		tap(update => console.log(this.displayedFlashcards)),
-		);
+		this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
+			switchMap(update => this.retrieveFlashcards()));
+		this.displayedFlashcards$.subscribe(newCards => {
+			this.displayedFlashcards = newCards 
+			this.flashcardsListService.setFlashcards(this.displayedFlashcards)
+		})
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
 	return this.fullFlashcardsListService.getAll().pipe(
-			map(flashcards => flashcards
-				.map(flashcard =>  {
+			tap(x => console.log(x)),
+			map(flashcards => flashcards.map( flashcard => {
 					if (flashcard.displayed === undefined) {
 						flashcard.displayed = true;
 					}
@@ -56,9 +55,8 @@ export class FlashcardsAreaComponent implements OnInit {
   }
 
   updateFlashcards() {
-	 this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(switchMap(update => 
-		this.retrieveFlashcards()));
-	 	this.setfullFlashcards();
+		this.refreshFullFlashcards.triggerUpdateFlashcards(true);
+
   }
 
   deleteConfirmation(i: number) {
@@ -69,10 +67,9 @@ export class FlashcardsAreaComponent implements OnInit {
 
   deleteClickedCard(i: number) {
 	let clickedFlashcardId = this.displayedFlashcards![i]["id"];
-	this.subs.add = this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId)
-		.subscribe(data => {
+	this.subs.add = this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId).subscribe(data => {
 			console.log(data);
-			this.updateFlashcards();
+			this.refreshFullFlashcards.triggerUpdateFlashcards(true);
 			this.subs.dispose();
 		})
   }

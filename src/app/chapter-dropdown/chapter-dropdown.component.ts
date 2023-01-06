@@ -28,8 +28,8 @@ export class ChapterDropdownComponent implements OnInit {
 
   identifyChapters() {
 		this.flashcardsListService.currentFlashCardsList$.subscribe(flashcardsList => {	
-		this.currentFlashcardList = flashcardsList;
-		this.currentChapterList = this.fillChapterList(flashcardsList);
+			this.currentFlashcardList = flashcardsList;
+			this.currentChapterList = this.fillChapterList(flashcardsList);
 		})
   }
 

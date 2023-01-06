@@ -11,6 +11,7 @@ export class Flashcard {
 		this.answer = answer;
 		this.chapter = chapter;
 		this.id = id;
+		this.displayed = true;
 	}
 }
 
