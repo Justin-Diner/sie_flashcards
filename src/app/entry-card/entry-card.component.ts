@@ -58,8 +58,6 @@ export class EntryCardComponent implements OnInit {
 		this.refreshFullFlashcardsService.triggerUpdateFlashcards(true);
 		this.subs.dispose();
 		});
-		
-	
 	}
 }
 

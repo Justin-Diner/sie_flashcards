@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
 import { of, map, tap, share, Subject, shareReplay } from 'rxjs';
@@ -25,38 +25,38 @@ export class FlashcardsAreaComponent implements OnInit {
 	private flashcardsListService: FlashcardsListService
 	 ) {}
 
-
   ngOnInit(): void {
 		this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
 			switchMap(update => this.retrieveFlashcards()));
-		this.displayedFlashcards$.subscribe(newCards => {
-			this.displayedFlashcards = newCards 
-			this.flashcardsListService.setFlashcards(this.displayedFlashcards)
-		})
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
-	return this.fullFlashcardsListService.getAll().pipe(
-			tap(x => console.log(x)),
+		return this.fullFlashcardsListService.getAll().pipe(
 			map(flashcards => flashcards.map( flashcard => {
-					if (flashcard.displayed === undefined) {
-						flashcard.displayed = true;
-					}
 				return flashcard;
-				}))
-	);
+			})),
+			tap(x => this.setfullFlashcards()),
+		);
   }
 
   setfullFlashcards() {
-	this.subs.add = this.displayedFlashcards$.subscribe(flashcards => {
-		this.displayedFlashcards = flashcards as Flashcard[];
-		this.subs.dispose();
-	})
+		this.subs.add = this.displayedFlashcards$.subscribe(flashcards => {
+			this.displayedFlashcards = flashcards as Flashcard[];
+			this.updateFlashcardService();
+			this.subs.dispose();
+		})
   }
+
+	updateFlashcardService() {
+		this.flashcardsListService.setFlashcards(this.displayedFlashcards)
+	}
+
+	triggerFlashcardsRefresh() {
+		this.refreshFullFlashcards.triggerUpdateFlashcards(true);
+	}
 
   updateFlashcards() {
 		this.refreshFullFlashcards.triggerUpdateFlashcards(true);
-
   }
 
   deleteConfirmation(i: number) {
@@ -67,11 +67,9 @@ export class FlashcardsAreaComponent implements OnInit {
 
   deleteClickedCard(i: number) {
 	let clickedFlashcardId = this.displayedFlashcards![i]["id"];
-	this.subs.add = this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId).subscribe(data => {
+	this.fullFlashcardsListService.deleteFlashcardById(clickedFlashcardId).subscribe(data => {
 			console.log(data);
-			this.refreshFullFlashcards.triggerUpdateFlashcards(true);
-			this.subs.dispose();
+			this.triggerFlashcardsRefresh();
 		})
   }
-
 }
