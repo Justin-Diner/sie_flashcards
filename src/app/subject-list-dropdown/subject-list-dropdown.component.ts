@@ -15,7 +15,7 @@ import { SelectedSubjectService } from '../services/selected-subject.service';
 export class SubjectListDropdownComponent implements OnInit {
 
   subjects$: Observable<CategorySubject[]> = of([]);
-  subjects: any[] = [];
+  subjects: CategorySubject[] = [];
   selectedSubjectTitle: String = "";
 
   constructor(
@@ -33,6 +33,7 @@ export class SubjectListDropdownComponent implements OnInit {
   identifySubjects(): void {
      this.subjectsService.getSubjectList().subscribe(x => {
         for (let subject of x) {
+          subject = new CategorySubject(subject.id, subject.name);
           this.subjects.push(subject);
         }
     });
@@ -41,10 +42,6 @@ export class SubjectListDropdownComponent implements OnInit {
   setSelectedSubject(subject: CategorySubject)  {
     this.selectedSubjectTitle = subject.name
     this.selectedSubjectService.setSelectedSubject(subject);
-    this.subjectService.getFlashcardsBySubject(subject.id).subscribe(selectedFlashcards => {
-      this.flashcardsListService.setFlashcards(selectedFlashcards)
-      this.refreshFullFlashcards.triggerUpdateFlashcards(false);
-    })
   }
 
 }

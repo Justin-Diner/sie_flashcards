@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { Flashcard } from '../classes/flashcard'
-import { of, map, tap, share, Subject, shareReplay } from 'rxjs';
+import { of, map, tap, share, Subject, shareReplay, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs';
 import { FullFlashcardsListService } from '../services/full-flashcards-list.service';
 import { RefreshFullFlashcardsService } from '../services/refresh-full-flashcards.service';
@@ -20,8 +20,8 @@ export class FlashcardsAreaComponent implements OnInit {
 	
   displayedFlashcards: Flashcard[] = [];
   displayedFlashcards$: Observable<Flashcard[]> = of([]);
-  selectedSubject: CategorySubject = new CategorySubject(1, "sie");
-  selectedSubject$: Observable<CategorySubject> = of();
+  currentSubject: CategorySubject = new CategorySubject(1, "sie");
+  currentSubjectSubscription: Subscription;
   private subs = new SubscriptionsContainer();
 
   constructor(
@@ -30,19 +30,20 @@ export class FlashcardsAreaComponent implements OnInit {
 	private flashcardsListService: FlashcardsListService,
   private subjectService: SubjectsService,
   private selectedSubjectService: SelectedSubjectService
-	 ) {}
+	 ) {
+    this.currentSubjectSubscription = this.selectedSubjectService.selectedSubject$.subscribe(value => {
+      this.currentSubject = value;
+      this.ngOnInit();
+    })
+   }
 
   ngOnInit(): void {
-    this.selectedSubject$ = this.selectedSubjectService.selectedSubject$.pipe(
-      map(value => {
-      return value as CategorySubject;
-    }))
 		this.displayedFlashcards$ = this.refreshFullFlashcards.refreshFlashCardsList$.pipe(
 			switchMap(update => this.retrieveFlashcards()));
   }
 
   retrieveFlashcards(): Observable<Flashcard[]> {
-		return this.subjectService.getFlashcardsBySubject(1)
+		return this.subjectService.getFlashcardsBySubject(this.currentSubject.id)
     .pipe(
 			map(flashcards => flashcards.map( flashcard => {
 				return flashcard;
@@ -83,5 +84,9 @@ export class FlashcardsAreaComponent implements OnInit {
 			console.log(data);
 			this.triggerFlashcardsRefresh();
 		})
+  }
+
+  ngOnDestory(): void {
+    this.currentSubjectSubscription.unsubscribe();
   }
 }

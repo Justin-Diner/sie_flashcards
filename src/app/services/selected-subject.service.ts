@@ -10,7 +10,7 @@ import CategorySubject from '../classes/subject';
 export class SelectedSubjectService {
 
   private _selectedSubject = new BehaviorSubject<CategorySubject>(new CategorySubject(1, 'sie')); 
-	selectedSubject$ = this._selectedSubject.asObservable();
+	public selectedSubject$ = this._selectedSubject.asObservable();
 
   constructor() { }
 
