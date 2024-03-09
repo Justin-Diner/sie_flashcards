@@ -19,7 +19,8 @@ export const getFlashcardsById = (req: Request, res: Response) => {
 }
 
 export const addFlashcard = (req: Request, res: Response) => {
-	const { question, answer, learned, chapter } = req.body; 
+	const { question, answer, learned, chapter, subject_id } = req.body; 
+  console.log(subject_id);
 
 	//check if question exists 
 		pool.query(checkQuestion, [question], (error, results) => {
@@ -27,7 +28,7 @@ export const addFlashcard = (req: Request, res: Response) => {
 			res.send("Question already exists.")
 		} else {
 		//add flashcard to db
-		pool.query(addFlashcards, [question, answer, learned, chapter], (error, results) => {
+		pool.query(addFlashcards, [question, answer, learned, chapter, subject_id], (error, results) => {
 			if (error) {
 				throw error;
 			} else {
