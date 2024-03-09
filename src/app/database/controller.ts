@@ -1,7 +1,7 @@
 import pool from '../../db.js';
 import { NextFunction, Request, Response } from 'express';
 import { QueryResult } from 'pg';
-import { getAllFlashcards, getFlashcardById, checkQuestion, addFlashcards, deleteFlashcard, updateFlashcards } from './queries.js'
+import { getAllFlashcards, getFlashcardById, checkQuestion, addFlashcards, deleteFlashcard, updateFlashcards, getAllSubjects, getAllFlashcardBySubjectId } from './queries.js'
 
 export const getFlashcards = async (req: Request, res: Response, next: NextFunction) => {
 	const response: QueryResult = await pool.query(getAllFlashcards); 
@@ -78,4 +78,20 @@ export const updateFlashcard = (req: Request, res: Response) => {
 		}
 	});
 };
-export default { getFlashcards, getFlashcardsById, addFlashcard, removeFlashcard, updateFlashcard };
+
+export const getSubjects = async (req: Request, res: Response) => {
+	const response: QueryResult = await pool.query(getAllSubjects); 
+	res.status(200).json(response.rows);
+}
+
+export const getFlashcardsBySubjectId = (req: Request, res: Response) => {
+	const id = parseInt(req.params['id']); 
+	pool.query(getAllFlashcardBySubjectId, [id], (error, results) => {
+		if (error) {
+			throw error
+		};
+		res.status(200).json(results.rows);
+	})
+}
+
+export default { getFlashcards, getFlashcardsById, addFlashcard, removeFlashcard, updateFlashcard, getSubjects };

@@ -1,0 +1,5 @@
+<div>Choose a Subject Below:</div>
+<button mat-button [matMenuTriggerFor]="menu">{{selectedSubjectTitle ? selectedSubjectTitle.toUpperCase() : "SIE"}}</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let subject of subjects" (click)="setSelectedSubject(subject)">{{subject ? subject.name.toUpperCase() : ""}}</button>
+</mat-menu>

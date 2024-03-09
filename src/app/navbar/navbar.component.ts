@@ -13,6 +13,6 @@ export class NavbarComponent implements OnInit {
   }
 
   reload() {
-	return window.location.reload();
+		window.location.reload();
   }
 }

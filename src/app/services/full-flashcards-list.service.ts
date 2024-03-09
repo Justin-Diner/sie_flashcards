@@ -32,6 +32,10 @@ export class FullFlashcardsListService {
 	deleteFlashcardById(id: any) {
 		return this.http.delete(`${this.baseURL}/${id}`, { responseType: 'text' as 'json' })
 	};
+
+	editFlashcardById(newFlashCard: Flashcard) {
+		return this.http.put(`${this.baseURL}/${newFlashCard.id}`, newFlashCard, {responseType: 'text' as 'json'})
+	}
 };
 
 

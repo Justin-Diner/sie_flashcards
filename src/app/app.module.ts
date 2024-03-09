@@ -23,6 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TrashButtonComponent } from './buttons/trash-button/trash-button.component';
 import { FullFlashcardsListService } from './services/full-flashcards-list.service';
 import { ChapterDropdownComponent } from './chapter-dropdown/chapter-dropdown.component';
+import { SubjectListDropdownComponent } from './subject-list-dropdown/subject-list-dropdown.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ChapterDropdownComponent } from './chapter-dropdown/chapter-dropdown.co
     ResetButtonComponent,
     TrashButtonComponent,
     ChapterDropdownComponent,
+    SubjectListDropdownComponent,
   ],
   imports: [
     BrowserModule,

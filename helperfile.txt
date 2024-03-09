@@ -1,0 +1,5 @@
+Start Commands:
+	node dist/server.js
+	npm run start 
+
+Don't forget to run tsc. This will compile your dist folder (which your server runs on)
